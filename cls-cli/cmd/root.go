@@ -10,7 +10,10 @@ import (
 	"github.com/tencentcloud/cls-cli/internal/cmdutil"
 	"github.com/tencentcloud/cls-cli/internal/output"
 	"github.com/tencentcloud/cls-cli/shortcuts/alarm"
+	"github.com/tencentcloud/cls-cli/shortcuts/collector"
 	"github.com/tencentcloud/cls-cli/shortcuts/log"
+	"github.com/tencentcloud/cls-cli/shortcuts/loglistener"
+	"github.com/tencentcloud/cls-cli/shortcuts/machinegroup"
 	"github.com/tencentcloud/cls-cli/shortcuts/topic"
 )
 
@@ -44,6 +47,9 @@ func Execute() int {
 	log.RegisterShortcuts(rootCmd, f)
 	topic.RegisterShortcuts(rootCmd, f)
 	alarm.RegisterShortcuts(rootCmd, f)
+	loglistener.RegisterShortcuts(rootCmd, f)
+	machinegroup.RegisterShortcuts(rootCmd, f)
+	collector.RegisterShortcuts(rootCmd, f)
 
 	rootCmd.AddCommand(newVersionCmd())
 
