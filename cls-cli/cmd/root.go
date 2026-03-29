@@ -36,6 +36,7 @@ func Execute() int {
 	var formatStr string
 	rootCmd.PersistentFlags().StringVar(&formatStr, "format", "json", "输出格式: json, pretty, table, csv")
 	rootCmd.PersistentFlags().BoolVar(&f.DryRun, "dry-run", false, "预览模式，不实际执行")
+	rootCmd.PersistentFlags().BoolVarP(&f.ForceYes, "yes", "y", false, "跳过危险操作的二次确认")
 
 	cobra.OnInitialize(func() {
 		f.Format = output.ParseFormat(formatStr)

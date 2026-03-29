@@ -1,8 +1,11 @@
 package cmdutil
 
 import (
+	"bufio"
+	"fmt"
 	"io"
 	"os"
+	"strings"
 	"sync"
 
 	"github.com/tencentcloud/cls-cli/internal/client"
@@ -22,6 +25,20 @@ type Factory struct {
 	IOStreams  *IOStreams
 	Format    output.Format
 	DryRun    bool
+	ForceYes  bool // --yes 跳过删除等危险操作的二次确认
+}
+
+// ConfirmAction 对危险操作进行二次确认，返回 true 表示用户确认执行。
+// 如果 ForceYes 为 true（传了 --yes），直接返回 true。
+func (f *Factory) ConfirmAction(message string) bool {
+	if f.ForceYes {
+		return true
+	}
+	fmt.Fprintf(f.IOStreams.ErrOut, "⚠️  %s\n", message)
+	fmt.Fprint(f.IOStreams.ErrOut, "确认请输入 yes: ")
+	reader := bufio.NewReader(f.IOStreams.In)
+	input, _ := reader.ReadString('\n')
+	return strings.TrimSpace(input) == "yes"
 }
 
 func NewDefault() *Factory {

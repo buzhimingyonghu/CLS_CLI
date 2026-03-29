@@ -342,6 +342,11 @@ func newDeleteCmd(f *cmdutil.Factory) *cobra.Command {
 				return nil
 			}
 
+			if !f.ConfirmAction(fmt.Sprintf("即将删除采集配置 %s，此操作不可逆！", configID)) {
+				fmt.Fprintln(f.IOStreams.ErrOut, "已取消删除操作")
+				return nil
+			}
+
 			clsClient, err := f.CLSClient()
 			if err != nil {
 				return err
