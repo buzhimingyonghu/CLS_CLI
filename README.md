@@ -4,6 +4,15 @@
 
 > 安装后配合 CodeBuddy Code / Claude Code / Cursor 等 AI 编程工具使用，用自然语言即可完成日志检索、仪表盘管理、告警配置等操作——无需记忆任何命令。
 
+## CodeBuddy使用示例
+
+使用 CodeBuddy Code 打开本项目目录后，执行以下命令完成初始化：
+
+```
+# 初始化（新用户首次使用）——会自动完成编译、配置、验证等步骤
+/cls_setup
+
+```
 ---
 
 ## 环境要求
@@ -16,14 +25,7 @@
 
 ## 快速开始
 
-### 1. 克隆仓库
-
-```bash
-git clone https://github.com/buzhimingyonghu/CLS_CLI.git
-cd CLS_CLI/cls-cli
-```
-
-### 2. 安装 Go（如未安装）
+### 1. 安装 Go（如未安装）
 
 **macOS：**
 ```bash
@@ -43,7 +45,7 @@ export PATH=$PATH:/usr/local/go/bin
 go version
 ```
 
-### 3. 编译安装
+### 2. 编译安装
 
 ```bash
 cd cls-cli
@@ -62,7 +64,7 @@ source ~/.zshrc
 cls-cli --version
 ```
 
-### 4. 配置腾讯云密钥
+### 3. 配置腾讯云密钥
 
 配置文件位于 `~/.cls-cli/config.json`，支持多账号管理。
 
@@ -113,7 +115,7 @@ export CLS_DEFAULT_REGION=ap-guangzhou
 cls-cli config show
 ```
 
-### 5. 验证连通性
+### 4. 验证连通性
 
 ```bash
 cls-cli topic +list
@@ -231,26 +233,16 @@ cls-cli dashboard +folders
 
 ## CodeBuddy Code Skills
 
+Skills 文件位于项目的 `.codebuddy/skills/` 目录下，使用 CodeBuddy Code 进入项目目录后即可直接调用。
+
 在 CodeBuddy Code 中内置了三个 Skill，配合自然语言使用更高效：
 
 | Skill | 调用方式 | 说明 |
 |---|---|---|
-| `cls-setup` | `/cls-setup` | 新用户初始化向导：克隆仓库 → 编译 → 生成配置模版 → 验证连通性 → 介绍命令 |
+| `cls-setup` | `/cls-setup` | 新用户初始化向导：编译 → 生成配置模版 → 验证连通性 → 介绍命令 |
 | `dashboard-create` | `/dashboard-create [仪表盘名称]` | 交互式创建仪表盘：自动列出所有文件夹供选择，支持从本地 JSON 导入 |
 | `cls-copy-dashboard` | `/cls-copy-dashboard` | 跨账号复制仪表盘：导出 → 修改数据源 TopicId → 切换账号 → 选文件夹 → 创建 |
 
-### 使用示例
-
-```
-# 初始化（新用户首次使用）
-/cls-setup
-
-# 交互式创建仪表盘
-/dashboard-create 业务大盘
-
-# 跨账号复制仪表盘
-/cls-copy-dashboard
-```
 
 ---
 
